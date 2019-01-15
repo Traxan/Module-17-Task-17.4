@@ -6,6 +6,11 @@ app.get('/', function (req, res) {
     res.sendFile('/index.html')
 });
 
+app.use(function(req, res, next){
+    console.log('Hej, jestem pośrednikiem między żądaniem a odpowiedzią!');
+    next();
+});
+
 var server = app.listen(3000, 'localhost', function() {
     var host = server.address().address;
     var port = server.address().port;
@@ -19,4 +24,8 @@ app.get('/userform', function (req, res) {
         last_name: req.query.last_name
     };
     res.end(JSON.stringify(response));
+});
+
+app.get('/store', function (req, res) {
+    res.send('To jest sklep');
 });
